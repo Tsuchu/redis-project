@@ -1,25 +1,26 @@
-IDIR =../include
-ODIR = ./obj
-SDIR = ./
+INCDIR =../include
+OBJDIR = ./obj
+SRCDIR = ./
+
 CC = gcc
-CFLAGS = 
+FLAGS = 
 
 _DEPS = 
-DEPS  = $(patsubst %, $(IDIR)/%, $(_DEPS))
+DEPS  = $(patsubst %, $(INCDIR)/%, $(_DEPS))
 
 _OBJS = main.o
-OBJS  = $(patsubst %, $(ODIR)/%, $(_OBJS))
+OBJS  = $(patsubst %, $(OBJDIR)/%, $(_OBJS))
 
 _SRCS = main.c
-SRCS  = $(patsubst %, $(SDIR)/%, $(_SRCS))
+SRCS  = $(patsubst %, $(SRCDIR)/%, $(_SRCS))
 
-$(ODIR)/%.o: $(SRCS) $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+$(OBJDIR)/%.o: $(SRCS) $(DEPS)
+	$(CC) -c -o $@ $< $(FLAGS)
 
 bin/app: $(OBJS)
-	$(CC) -o $@ $^ $(CFLAGS)
+	$(CC) -o $@ $^ $(FLAGS)
 
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 
+	rm -f $(OBJDIR)/*.o *~ core $(INCDIR)/*~ 
